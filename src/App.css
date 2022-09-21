@@ -2,7 +2,7 @@
   text-align: center;
 }
 
-.ReactLight{
+.ReactLight {
   display: flex;
   flex-direction: row;
   gap: 3px;
@@ -20,7 +20,14 @@
 .TrafficLight-light {
   height: 65px;
   width: 65px;
-  background-color: rgb(61, 59, 59);
   border-radius: 50%;
   display: inline-block;
+}
+
+.TrafficLight-light-off {
+  background-color: rgb(61, 59, 59);
+}
+
+.TrafficLight-light-on {
+  background-color: rgb(223, 17, 17);
 }
