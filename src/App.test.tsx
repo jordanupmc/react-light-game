@@ -36,17 +36,17 @@ describe("React Light Game", () => {
       const appDiv = await findByTestId("ReactLightDiv");
       fireEvent.click(appDiv);
 
-      await waitFor(() => { expect(trafficLight1).toHaveClass('TrafficLight-light-on'); }, { timeout: 1000 });
-      await waitFor(() => { expect(trafficLight2).toHaveClass('TrafficLight-light-on'); }, { timeout: 1000 });
-      await waitFor(() => { expect(trafficLight3).toHaveClass('TrafficLight-light-on'); }, { timeout: 1000 });
-      await waitFor(() => { expect(trafficLight4).toHaveClass('TrafficLight-light-on'); }, { timeout: 1000 });
+      await waitFor(() => { expect(trafficLight1).toHaveClass('TrafficLight-light-on'); });
+      await waitFor(() => { expect(trafficLight2).toHaveClass('TrafficLight-light-on'); });
+      await waitFor(() => { expect(trafficLight3).toHaveClass('TrafficLight-light-on'); });
+      await waitFor(() => { expect(trafficLight4).toHaveClass('TrafficLight-light-on'); });
 
       await waitFor(() => {
         expect(trafficLight1).toHaveClass('TrafficLight-light-off');
         expect(trafficLight2).toHaveClass('TrafficLight-light-off');
         expect(trafficLight3).toHaveClass('TrafficLight-light-off');
         expect(trafficLight4).toHaveClass('TrafficLight-light-off');
-      }, { timeout: 4000 });
+      }, { timeout: 3800 });
 
       fireEvent.click(appDiv);
 
@@ -56,7 +56,7 @@ describe("React Light Game", () => {
   });
 
   describe("False start state", () => {
-    it('state should be false start when click after first light on', async () => {
+    it('should display False start when click after first light on', async () => {
       const { container, findByTestId, queryByTestId } = render(<ReactLight {...props} />);
 
       const trafficLight1 = await findByTestId("tf1-4");
@@ -70,7 +70,7 @@ describe("React Light Game", () => {
       expect(queryByTestId("FalseStartDisplay")).toBeInTheDocument();
     });
 
-    it('state should be false start when click after second light on', async () => {
+    it('should display False start when click after second light on', async () => {
       const { container, findByTestId, queryByTestId } = render(<ReactLight {...props} />);
 
       const trafficLight2 = await findByTestId("tf2-4");
@@ -84,7 +84,7 @@ describe("React Light Game", () => {
       expect(queryByTestId("FalseStartDisplay")).toBeInTheDocument();
     });
 
-    it('state should be false start when click after third light on', async () => {
+    it('should display False start when click after third light on', async () => {
       const { container, findByTestId, queryByTestId } = render(<ReactLight {...props} />);
 
       const trafficLight3 = await findByTestId("tf3-4");
@@ -98,7 +98,7 @@ describe("React Light Game", () => {
       expect(queryByTestId("FalseStartDisplay")).toBeInTheDocument();
     });
 
-    it('state should be false start when click after fourth light on', async () => {
+    it('should display False start when click after fourth light on', async () => {
       const { container, findByTestId, queryByTestId } = render(<ReactLight {...props} />);
 
       const trafficLight4 = await findByTestId("tf4-4");
@@ -111,6 +111,7 @@ describe("React Light Game", () => {
       fireEvent.click(appDiv);
       expect(queryByTestId("FalseStartDisplay")).toBeInTheDocument();
     });
+
   });
 
 });
