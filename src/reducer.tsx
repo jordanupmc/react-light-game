@@ -22,6 +22,7 @@ export type ReactLightActionType =
     | "LIGHT_OFF_ALL_TRAFFIC_LIGHT"
     | "GOOD_START"
     | "FALSE_START"
+    | 'REPLAY_GAME'
 
 export interface ReactLightAction {
     type: ReactLightActionType;
@@ -38,17 +39,19 @@ export const initialState: ReactLightState = {
 export const reducer: ((arg0: ReactLightState, arg1: ReactLightAction) => ReactLightState) = (state, action) => {
     switch (action.type) {
         case "LIGHT_ON_SINGLE_TRAFFIC_LIGHT":
-            if(state.gameState === "FALSE_START") return {...state};
+            if (state.gameState === "FALSE_START") return { ...state };
             const lightNumber: number = action.payload;
             const newLights = [...state.trafficLights];
             newLights[lightNumber] = LightColor.RED;
             return { ...state, trafficLights: newLights, gameState: "COUNT_START" };
         case "LIGHT_OFF_ALL_TRAFFIC_LIGHT":
-            return { ...state, trafficLights: [LightColor.BLACK, LightColor.BLACK, LightColor.BLACK, LightColor.BLACK], gameState: 'START_RACE', startTime: Date.now() };
+            return { ...state, trafficLights: [...initialState.trafficLights], gameState: 'START_RACE', startTime: Date.now() };
         case "GOOD_START":
             return { ...state, clickReactionTime: action.payload, gameState: 'GAME_OVER' };
         case "FALSE_START":
-            return { ...state, gameState: 'FALSE_START'};
+            return { ...state, gameState: 'FALSE_START' };
+        case "REPLAY_GAME":
+            return { ...initialState };
         default:
             throw new Error("Unkown action type " + action.type);
     }

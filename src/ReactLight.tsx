@@ -43,7 +43,7 @@ const handlClick = (state: ReactLightState, dispatch: React.Dispatch<ReactLightA
                break;
           case "GAME_OVER":
           case "FALSE_START":
-               // todo reset game
+              dispatch({type: 'REPLAY_GAME'})
                break;
      }
 }
