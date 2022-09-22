@@ -7,8 +7,8 @@ describe("React Light Game", () => {
 
   const props: ReactLightProps = { lightOnDelay: 350, lightOffWait: 2 };
 
-  it('should render 4 traffic lights', async () => {
-    const { findAllByTestId } = render(<App />);
+  it('should render 4 traffic lights with WaitingDisplay', async () => {
+    const { findAllByTestId, queryByTestId } = render(<App />);
 
     const trafficLight1 = await findAllByTestId("tf1-4");
     const trafficLight2 = await findAllByTestId("tf2-4");
@@ -19,6 +19,7 @@ describe("React Light Game", () => {
     expect(trafficLight2).toHaveLength(1);
     expect(trafficLight3).toHaveLength(1);
     expect(trafficLight4).toHaveLength(1);
+    expect(queryByTestId("WaitingDisplay")).toBeVisible();
   });
 
 

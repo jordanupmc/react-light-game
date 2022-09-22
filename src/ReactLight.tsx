@@ -24,6 +24,7 @@ export const ReactLight = ({ lightOffWait, lightOnDelay }: ReactLightProps) => {
                     <TrafficLight id={3} state={state} lightOnNextTrafficLightCallBack={waitCallback3} />
                     <TrafficLight id={4} state={state} waitBeforeStart={waitCallback4} />
                </div>
+               {state.gameState === 'WAITING' && <h2 data-testid="WaitingDisplay">Click to play then click again when light are off</h2>}
                {state.gameState === 'GAME_OVER' && <h2 data-testid="ReactionTimeDisplay">Reaction time : {state.clickReactionTime}</h2>}
                {state.gameState === 'FALSE_START' && <h2 data-testid="FalseStartDisplay">FALSE START !</h2>}
           </>
