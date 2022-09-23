@@ -8,6 +8,9 @@ export interface ReactLightProps {
      lightOffWait?: number;
 }
 
+const MAX_WAIT_FOR_LIGHT_OFF = 8500;
+const LIGHT_DELAY = 950;
+
 export const ReactLight = ({ lightOffWait, lightOnDelay }: ReactLightProps) => {
      const [state, dispatch] = useReducer(reducer, initialState);
      const waitCallback1 = useCallback(() => waitThenLightOn(dispatch, 1, lightOnDelay), [lightOnDelay]);
@@ -44,16 +47,17 @@ const handlClick = (state: ReactLightState, dispatch: React.Dispatch<ReactLightA
                break;
           case "GAME_OVER":
           case "FALSE_START":
-              dispatch({type: 'REPLAY_GAME'})
+               dispatch({ type: 'REPLAY_GAME' })
                break;
      }
 }
+
 const waitThenLightOff = (dispatch: React.Dispatch<ReactLightAction>, lightOffWait: number | undefined) => {
-     const timeout = lightOffWait ? lightOffWait : getRandomNumber(8500);
-     setTimeout(() => { dispatch({ type: 'LIGHT_OFF_ALL_TRAFFIC_LIGHT' }); }, timeout);
+     const timeout = lightOffWait ? lightOffWait : getRandomNumber(MAX_WAIT_FOR_LIGHT_OFF);
+     setTimeout(() => { dispatch({ type: 'LIGHT_OFF_ALL_TRAFFIC_LIGHT', payload: Date.now() }); }, timeout);
 }
 const waitThenLightOn = (dispatch: React.Dispatch<ReactLightAction>, trafficLightNumber: number, lightOnDelay: number | undefined) => {
-     const timeout = lightOnDelay ? lightOnDelay : 950;
+     const timeout = lightOnDelay ? lightOnDelay : LIGHT_DELAY;
      setTimeout(() => dispatch({ type: 'LIGHT_ON_SINGLE_TRAFFIC_LIGHT', payload: trafficLightNumber }), timeout);
 }
 
@@ -68,4 +72,3 @@ const startRace = (dispatch: React.Dispatch<ReactLightAction>, startTime: number
      const timeClick = Date.now();
      dispatch({ type: 'GOOD_START', payload: (timeClick - startTime) / 1000 });
 }
-

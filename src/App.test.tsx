@@ -6,7 +6,7 @@ import { act } from 'react-dom/test-utils';
 
 describe("React Light Game", () => {
 
-  const props: ReactLightProps = { lightOnDelay: 350, lightOffWait: 2 };
+  const props: ReactLightProps = { lightOnDelay: 100, lightOffWait: 20 };
 
   it('should render 4 traffic lights with WaitingDisplay', async () => {
     const { findAllByTestId, queryByTestId } = render(<App />);
@@ -216,7 +216,7 @@ describe("React Light Game", () => {
 
 
     it('should not display start race after false start after fourth light on', async () => {
-      const { findByTestId, queryByTestId } = render(<ReactLight {...props} lightOffWait={450} />);
+      const { findByTestId, queryByTestId } = render(<ReactLight {...props} lightOffWait={250} />);
 
       const trafficLight4 = await findByTestId("tf4-4");
 
@@ -225,10 +225,10 @@ describe("React Light Game", () => {
 
       await waitFor(() => { expect(trafficLight4).toHaveClass('TrafficLight-light-on'); }, { timeout: 2500 });
 
-      setTimeout(() => fireEvent.click(appDiv), 400);
+      setTimeout(() => fireEvent.click(appDiv), 100);
       await waitFor(() => expect(queryByTestId("FalseStartDisplay")).toBeInTheDocument());
 
-      await act(() => new Promise(r => setTimeout(r, 600)));
+      await act(() => new Promise(r => setTimeout(r, 350)));
       expect(queryByTestId("FalseStartDisplay")).toBeInTheDocument();
 
     });

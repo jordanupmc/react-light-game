@@ -19,8 +19,8 @@
 }
 
 .TrafficLight-light {
-  height: 85px;
-  width: 85px;
+  height: 65px;
+  width: 65px;
   border-radius: 50%;
   display: inline-block;
   margin: 5.3px;
