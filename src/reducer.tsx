@@ -45,6 +45,7 @@ export const reducer: ((arg0: ReactLightState, arg1: ReactLightAction) => ReactL
             newLights[lightNumber] = LightColor.RED;
             return { ...state, trafficLights: newLights, gameState: "COUNT_START" };
         case "LIGHT_OFF_ALL_TRAFFIC_LIGHT":
+            if (state.gameState === "FALSE_START") return { ...state };
             return { ...state, trafficLights: [...initialState.trafficLights], gameState: 'START_RACE', startTime: Date.now() };
         case "GOOD_START":
             return { ...state, clickReactionTime: action.payload, gameState: 'GAME_OVER' };
