@@ -1,15 +1,16 @@
 {
   "files": {
     "main.css": "/react-light-game/static/css/main.3d8ac9e9.css",
-    "main.js": "/react-light-game/static/js/main.4dcb6532.js",
+    "main.js": "/react-light-game/static/js/main.6b2b75d2.js",
     "static/js/787.d3e2e2ff.chunk.js": "/react-light-game/static/js/787.d3e2e2ff.chunk.js",
+    "static/media/lightSound.mp3": "/react-light-game/static/media/lightSound.e4cca6e4cec75a188e1f.mp3",
     "index.html": "/react-light-game/index.html",
     "main.3d8ac9e9.css.map": "/react-light-game/static/css/main.3d8ac9e9.css.map",
-    "main.4dcb6532.js.map": "/react-light-game/static/js/main.4dcb6532.js.map",
+    "main.6b2b75d2.js.map": "/react-light-game/static/js/main.6b2b75d2.js.map",
     "787.d3e2e2ff.chunk.js.map": "/react-light-game/static/js/787.d3e2e2ff.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.3d8ac9e9.css",
-    "static/js/main.4dcb6532.js"
+    "static/js/main.6b2b75d2.js"
   ]
 }
