@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { LightColor, ReactLightState } from './reducer';
-
+import SoundPlayer from './SoundPlayer';
 
 interface PropsType {
   id: number;
@@ -11,16 +11,21 @@ interface PropsType {
 
 export const TrafficLight = ({ id, state, lightOnNextTrafficLightCallBack, waitBeforeStart }: PropsType) => {
   const currentColor = state.trafficLights[id - 1];
+  const soundPlayer = useMemo(() => new SoundPlayer(), []);
+
   useEffect(() => {
-    if (lightOnNextTrafficLightCallBack !== undefined && currentColor === LightColor.RED) {
+    if (lightOnNextTrafficLightCallBack && currentColor === LightColor.RED) {
+      soundPlayer.play();
       lightOnNextTrafficLightCallBack();
       return;
     }
-    if (waitBeforeStart !== undefined && currentColor === LightColor.RED) {
+    if (waitBeforeStart && currentColor === LightColor.RED) {
+      soundPlayer.play();
       waitBeforeStart();
       return;
     }
-  }, [currentColor, lightOnNextTrafficLightCallBack, waitBeforeStart]);
+  }, [currentColor, soundPlayer, lightOnNextTrafficLightCallBack, waitBeforeStart]);
+
 
   return (
     <div className="TrafficLight">

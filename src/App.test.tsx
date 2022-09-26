@@ -3,6 +3,15 @@ import { findAllByTestId, findByTestId, fireEvent, render, screen, waitFor } fro
 import App from './App';
 import { ReactLightProps, ReactLight } from './ReactLight';
 import { act } from 'react-dom/test-utils';
+import SoundPlayer from './SoundPlayer';
+jest.mock('./SoundPlayer');
+const SoundPlayerMock = SoundPlayer as jest.Mock<SoundPlayer>;
+
+beforeEach(() => {
+  // Clear all instances and calls to constructor and all methods:
+  SoundPlayerMock.mockClear();
+});
+
 
 describe("React Light Game", () => {
 
@@ -27,6 +36,7 @@ describe("React Light Game", () => {
 
   describe("Nominal sequence", () => {
 
+
     it('should light on 4 traffic light after click then should wait X seconds then light off finally click should display reaction time', async () => {
       const { findByTestId, queryByTestId } = render(<ReactLight {...props} />);
 
@@ -42,6 +52,8 @@ describe("React Light Game", () => {
       await waitFor(() => expect(trafficLight2).toHaveClass('TrafficLight-light-on'));
       await waitFor(() => expect(trafficLight3).toHaveClass('TrafficLight-light-on'));
       await waitFor(() => expect(trafficLight4).toHaveClass('TrafficLight-light-on'));
+
+      expect(SoundPlayer).toHaveBeenCalledTimes(4);
 
       await waitFor(() => {
         expect(trafficLight1).toHaveClass('TrafficLight-light-off');

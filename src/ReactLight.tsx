@@ -56,10 +56,6 @@ const waitThenLightOff = (dispatch: React.Dispatch<ReactLightAction>, lightOffWa
      const timeout = lightOffWait ? lightOffWait : getRandomNumber(MAX_WAIT_FOR_LIGHT_OFF);
      setTimeout(() => { dispatch({ type: 'LIGHT_OFF_ALL_TRAFFIC_LIGHT', payload: Date.now() }); }, timeout);
 }
-const waitThenLightOn = (dispatch: React.Dispatch<ReactLightAction>, trafficLightNumber: number, lightOnDelay: number | undefined) => {
-     const timeout = lightOnDelay ? lightOnDelay : LIGHT_DELAY;
-     setTimeout(() => dispatch({ type: 'LIGHT_ON_SINGLE_TRAFFIC_LIGHT', payload: trafficLightNumber }), timeout);
-}
 
 const getRandomNumber = (limit: number): number => {
      const array = new Uint32Array(1);
@@ -67,6 +63,12 @@ const getRandomNumber = (limit: number): number => {
 
      return Math.abs(array[0]) % limit;
 }
+
+const waitThenLightOn = (dispatch: React.Dispatch<ReactLightAction>, trafficLightNumber: number, lightOnDelay: number | undefined) => {
+     const timeout = lightOnDelay ? lightOnDelay : LIGHT_DELAY;
+     setTimeout(() => dispatch({ type: 'LIGHT_ON_SINGLE_TRAFFIC_LIGHT', payload: trafficLightNumber }), timeout);
+}
+
 
 const startRace = (dispatch: React.Dispatch<ReactLightAction>, startTime: number): void => {
      const timeClick = Date.now();
